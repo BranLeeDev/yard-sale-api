@@ -10,7 +10,14 @@ class CategoriesService {
   }
 
   async findOne(id) {
-    const rta = models.Category.findByPk(id);
+    const rta = models.Category.findByPk(id, {
+      include: [
+        {
+          association: "products",
+          attributes: { exclude: ["createdAt", "updatedAt"] },
+        },
+      ],
+    });
     if (!rta) throw boom.notFound("Category not Found");
     return rta;
   }

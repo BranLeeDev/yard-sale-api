@@ -3,12 +3,20 @@ const { models } = require("../libs/sequelize");
 
 class UsersService {
   async findAll() {
-    const rta = models.User.findAll();
+    const rta = models.User.findAll({
+      include: [
+        {
+          association: "customer",
+          attributes: { exclude: ["createdAt", "updatedAt"] },
+        },
+      ],
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    });
     return rta;
   }
 
   async findOne(id) {
-    const rta = models.User.findByPk(id);
+    const rta = models.User.findByPk(id, { include: ["customer"] });
     if (!rta) throw boom.notFound("User not Found");
     return rta;
   }
