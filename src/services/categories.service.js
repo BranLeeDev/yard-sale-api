@@ -3,7 +3,9 @@ const { models } = require("../libs/sequelize");
 
 class CategoriesService {
   async findAll() {
-    const rta = models.Category.findAll();
+    const rta = models.Category.findAll({
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    });
     return rta;
   }
 
