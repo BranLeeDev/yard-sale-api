@@ -1,3 +1,5 @@
+const { ValidationError } = require("sequelize");
+
 function errorHandler(err, req, res, next) {
   return res.status(500).json({
     message: err.message,
@@ -14,7 +16,21 @@ function boomErrorHandler(err, req, res, next) {
   }
 }
 
+function ormErrorHandler(err, req, res, next) {
+  if (err instanceof ValidationError) {
+    return res.status(409).json({
+      statusCode: 409,
+      message: err.message,
+      errors: err.errors,
+      stack: err.stack,
+    });
+  } else {
+    next(err);
+  }
+}
+
 module.exports = {
   errorHandler,
   boomErrorHandler,
+  ormErrorHandler,
 };
