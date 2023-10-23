@@ -3,7 +3,7 @@ require("dotenv").config();
 const config = {
   env: process.env.NODE_ENV,
   port: process.env.PORT || 3000,
-  isPro: process.env.NODE_ENV === "production",
+  isPro: process.env.NODE_ENV === "development",
   dbUrl: process.env.DATABASE_URL,
   dbName: process.env.DB_NAME,
   dbUser: process.env.DB_USER,
