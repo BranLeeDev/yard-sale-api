@@ -21,19 +21,6 @@ const getOneCustomer = async (req, res, next) => {
   }
 };
 
-const createCustomer = async (req, res, next) => {
-  try {
-    const body = req.body;
-    const rta = await service.create(body);
-    return res.status(201).json({
-      message: "Customer created",
-      data: rta,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
 const updateCustomer = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -64,7 +51,6 @@ const deleteCustomer = async (req, res, next) => {
 module.exports = {
   getAllCustomers,
   getOneCustomer,
-  createCustomer,
   updateCustomer,
   deleteCustomer,
 };

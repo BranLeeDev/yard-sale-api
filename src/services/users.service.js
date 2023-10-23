@@ -22,7 +22,7 @@ class UsersService {
   }
 
   async create(body) {
-    const rta = models.User.create(body);
+    const rta = models.User.create(body, { include: ["customer"] });
     return rta;
   }
 

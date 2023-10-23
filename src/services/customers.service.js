@@ -21,11 +21,6 @@ class CustomersService {
     return rta;
   }
 
-  async create(body) {
-    const rta = models.Customer.create(body);
-    return rta;
-  }
-
   async update(id, changes) {
     const customer = await this.findOne(id);
     const rta = await customer.update(changes);
