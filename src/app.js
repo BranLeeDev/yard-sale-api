@@ -9,6 +9,7 @@ const {
   errorHandler,
   boomErrorHandler,
 } = require("./middlewares/errors.middleware");
+const routerApi = require("./routes");
 
 const app = express();
 
@@ -30,6 +31,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   return res.send("I am the HOME");
 });
+
+routerApi(app);
 
 app.use(boomErrorHandler);
 app.use(errorHandler);
