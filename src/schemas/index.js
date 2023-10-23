@@ -8,4 +8,5 @@ const getOneSchema = Joi.object({
 
 module.exports = {
   getOneSchema,
+  id,
 };
