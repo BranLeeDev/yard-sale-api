@@ -16,6 +16,7 @@ const OrderProductSchema = {
     type: DataTypes.INTEGER,
   },
   orderId: {
+    field: "order_id",
     allowNull: false,
     type: DataTypes.INTEGER,
     references: {
@@ -26,6 +27,7 @@ const OrderProductSchema = {
     onDelete: "CASCADE",
   },
   productId: {
+    field: "product_id",
     allowNull: false,
     type: DataTypes.INTEGER,
     references: {
