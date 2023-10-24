@@ -2,8 +2,8 @@ const boom = require("@hapi/boom");
 const { models } = require("../libs/sequelize");
 
 class ProductsService {
-  async findAll() {
-    const rta = models.Product.findAll({
+  async findAll(query) {
+    const options = {
       include: [
         {
           association: "category",
@@ -13,7 +13,16 @@ class ProductsService {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
-    });
+    };
+
+    const { limit, offset } = query;
+
+    if (limit && offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+
+    const rta = models.Product.findAll(options);
     return rta;
   }
 

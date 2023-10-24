@@ -13,6 +13,7 @@ const {
 const {
   createProductSchema,
   updateProductSchema,
+  queryProductSchema,
 } = require("../schemas/products.schema");
 const { getOneSchema } = require("../schemas");
 
@@ -23,7 +24,7 @@ const productsRouter = express.Router();
 
 productsRouter
   .route("/")
-  .get(getAllProducts)
+  .get(validateSchema(queryProductSchema, "query"), getAllProducts)
   .post(validateSchema(createProductSchema, "body"), createProduct);
 
 productsRouter

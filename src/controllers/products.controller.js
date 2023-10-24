@@ -4,7 +4,8 @@ const service = new ProductsService();
 
 const getAllProducts = async (req, res, next) => {
   try {
-    const rta = await service.findAll();
+    const query = req.query;
+    const rta = await service.findAll(query);
     return res.json(rta);
   } catch (error) {
     next(error);
