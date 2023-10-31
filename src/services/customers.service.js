@@ -3,11 +3,11 @@ const { models } = require("../libs/sequelize");
 
 class CustomersService {
   async findAll() {
-    const rta = models.Customer.findAll({
+    const rta = await models.Customer.findAll({
       include: [
         {
           association: "user",
-          attributes: { exclude: ["createdAt", "updatedAt"] },
+          attributes: { exclude: ["createdAt", "updatedAt", "password"] },
         },
       ],
       attributes: { exclude: ["createdAt", "updatedAt"] },
@@ -16,7 +16,9 @@ class CustomersService {
   }
 
   async findOne(id) {
-    const rta = models.Customer.findByPk(id, { include: ["user"] });
+    const rta = await models.Customer.findByPk(id, {
+      include: [{ association: "user", attributes: { exclude: "password" } }],
+    });
     if (!rta) throw boom.notFound("Customer not Found");
     return rta;
   }

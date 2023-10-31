@@ -3,7 +3,7 @@ const { models } = require("../libs/sequelize");
 
 class OrdersService {
   async findOne(id) {
-    const rta = models.Order.findByPk(id, {
+    const rta = await models.Order.findByPk(id, {
       include: [
         {
           association: "customer",
@@ -21,7 +21,7 @@ class OrdersService {
 
   // Order
   async create(body) {
-    const rta = models.Order.create(body);
+    const rta = await models.Order.create(body);
     return rta;
   }
 

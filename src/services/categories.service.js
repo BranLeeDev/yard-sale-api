@@ -3,14 +3,14 @@ const { models } = require("../libs/sequelize");
 
 class CategoriesService {
   async findAll() {
-    const rta = models.Category.findAll({
+    const rta = await models.Category.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
     });
     return rta;
   }
 
   async findOne(id) {
-    const rta = models.Category.findByPk(id, {
+    const rta = await models.Category.findByPk(id, {
       include: [
         {
           association: "products",
@@ -23,7 +23,7 @@ class CategoriesService {
   }
 
   async create(body) {
-    const rta = models.Category.create(body);
+    const rta = await models.Category.create(body);
     return rta;
   }
 

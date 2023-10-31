@@ -33,18 +33,18 @@ class ProductsService {
       };
     }
 
-    const rta = models.Product.findAll(options);
+    const rta = await models.Product.findAll(options);
     return rta;
   }
 
   async findOne(id) {
-    const rta = models.Product.findByPk(id);
+    const rta = await models.Product.findByPk(id);
     if (!rta) throw boom.notFound("Product not Found");
     return rta;
   }
 
   async create(body) {
-    const rta = models.Product.create(body);
+    const rta = await models.Product.create(body);
     return rta;
   }
 
