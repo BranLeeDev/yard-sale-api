@@ -5,6 +5,7 @@ const helmet = require("helmet");
 const boom = require("@hapi/boom");
 
 // Imports
+require("./utils/auth");
 const {
   errorHandler,
   boomErrorHandler,
